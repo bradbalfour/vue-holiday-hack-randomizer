@@ -1,5 +1,5 @@
 <script>
-import shuffle from 'lodash/shuffle'
+import shuffle from "lodash/shuffle";
 // @ is an alias to /src
 import PeopleList from "@/components/PeopleList.vue";
 
@@ -52,8 +52,29 @@ export default {
   },
   methods: {
     randomize() {
-      console.log('random 🤪')
-      this.people = shuffle(this.people)
+      console.log("randomize it!");
+      // tracking the interval when running
+      // need to track so we can clear it later
+      let shuffleInterval;
+
+      const numberOfShuffles = 4;
+      let currentShuffle = 0;
+
+      const shuffleCallback = () => {
+        console.log("shuffling", currentShuffle);
+        if (currentShuffle < numberOfShuffles) {
+          this.people = shuffle(this.people);
+          currentShuffle++;
+        } else {
+          clearInterval(shuffleInterval);
+        }
+      };
+
+      const startInterval = () => {
+        shuffleInterval = setInterval(shuffleCallback, 1000);
+      };
+
+      startInterval();
     }
   }
 };
