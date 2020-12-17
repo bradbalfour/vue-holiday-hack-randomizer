@@ -5,39 +5,39 @@ import PeopleList from "@/components/PeopleList.vue";
 
 const samplePeople = [
   {
-    name: "Tracey Holinka",
+    name: "1 - Tracey Holinka",
     email: "hello@email.com"
   },
   {
-    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    name: "2 - Brad Balfour", // I totally know how to spell Brad's last name without looking it up
     email: "hello@anotheremail.com"
   },
   {
-    name: "Bryan Strong",
+    name: "3 - Bryan Strong",
     email: "hi@something.com"
   },
   {
-    name: "Tracey Holinka",
+    name: "4 - Tracey Holinka",
     email: "hello1@email.com"
   },
   {
-    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    name: "5 - Brad Balfour", // I totally know how to spell Brad's last name without looking it up
     email: "hello2@anotheremail.com"
   },
   {
-    name: "Bryan Strong",
+    name: "6 - Bryan Strong",
     email: "hi3@something.com"
   },
   {
-    name: "Tracey Holinka",
+    name: "7 - Tracey Holinka",
     email: "hello4@email.com"
   },
   {
-    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    name: "8 - Brad Balfour", // I totally know how to spell Brad's last name without looking it up
     email: "hello5@anotheremail.com"
   },
   {
-    name: "Bryan Strong",
+    name: "9 - Bryan Strong",
     email: "hi6@something.com"
   }
 ];
@@ -48,7 +48,10 @@ export default {
     PeopleList
   },
   data() {
-    return { people: samplePeople };
+    return {
+      people: samplePeople,
+      highlightWinner: false
+    };
   },
   methods: {
     randomize() {
@@ -65,10 +68,12 @@ export default {
           currentShuffle++;
         } else {
           clearInterval(shuffleInterval);
+          this.highlightWinner = true;
         }
       };
 
       const startInterval = () => {
+        this.people = shuffle(this.people);
         shuffleInterval = setInterval(shuffleCallback, 1000);
       };
 
@@ -80,7 +85,7 @@ export default {
 
 <template>
   <div class="home">
-    <PeopleList :people="people" />
+    <PeopleList :people="people" :highlightWinner="highlightWinner" />
     <button @click="randomize">Randomize! 🤪</button>
     <!-- <PeopleList v-bind="{ people }" /> -->
   </div>
