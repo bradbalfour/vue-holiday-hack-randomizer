@@ -23,6 +23,7 @@ export default {
       <li
         v-for="({ name, email }, index) in people"
         :key="email"
+        class="flip-list-item"
         :class="{ 'highlighted-winner': highlightWinner && index === 0 }"
       >
         {{ name }}
@@ -38,9 +39,23 @@ export default {
   transition: all 1s;
 }
 .highlighted-winner {
+  font-weight: bold;
   font-size: 40px;
 }
+
+/* Transition Handling */
+/* https://vuejs.org/v2/guide/transitions.html#List-Transitions */
+
 .flip-list-move {
-  transition: transform 1s;
+  transition: all 1s;
+}
+
+.flip-list-item {
+  transition: all 1s;
+}
+.flip-list-enter, .flip-list-leave-to
+/* .list-complete-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
