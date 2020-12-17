@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <PeopleList :people="people" />
+    <!-- <PeopleList v-bind="{ people }" /> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import PeopleList from "@/components/PeopleList.vue";
+
+const samplePeople = [
+  {
+    name: "Tracey Holinka",
+    email: "hello@email.com"
+  },
+  {
+    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    email: "hello@anotheremail.com"
+  },
+  {
+    name: "Bryan Strong",
+    email: "hi@something.com"
+  }
+];
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    PeopleList
+  },
+  data() {
+    return { people: samplePeople };
   }
 };
 </script>
