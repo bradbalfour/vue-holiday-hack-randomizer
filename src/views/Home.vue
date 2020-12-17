@@ -49,7 +49,8 @@ export default {
   },
   data() {
     return {
-      people: samplePeople,
+      contestants: samplePeople,
+      winners: [],
       highlightWinner: false
     };
   },
@@ -59,25 +60,34 @@ export default {
       // need to track so we can clear it later
       let shuffleInterval;
 
-      const numberOfShuffles = 4;
+      // TODO - allow this to vary between 2 & 5
+      const numberOfShuffles = 2;
+
       let currentShuffle = 0;
 
       const shuffleCallback = () => {
         if (currentShuffle < numberOfShuffles) {
-          this.people = shuffle(this.people);
+          this.contestants = shuffle(this.contestants);
           currentShuffle++;
         } else {
           clearInterval(shuffleInterval);
           this.highlightWinner = true;
+          setTimeout(() => {
+            this.highlightWinner = false;
+            this.moveWinner();
+          }, 3000);
         }
       };
 
       const startInterval = () => {
-        this.people = shuffle(this.people);
+        this.contestants = shuffle(this.contestants);
         shuffleInterval = setInterval(shuffleCallback, 1000);
       };
 
       startInterval();
+    },
+    moveWinner() {
+      this.winners.push(this.contestants.shift());
     }
   }
 };
@@ -85,8 +95,11 @@ export default {
 
 <template>
   <div class="home">
-    <PeopleList :people="people" :highlightWinner="highlightWinner" />
+    <h2>Contestants</h2>
+    <PeopleList :people="contestants" :highlightWinner="highlightWinner" />
     <button @click="randomize">Randomize! 🤪</button>
+    <h2>Winners</h2>
+    <PeopleList :people="winners" />
     <!-- <PeopleList v-bind="{ people }" /> -->
   </div>
 </template>
