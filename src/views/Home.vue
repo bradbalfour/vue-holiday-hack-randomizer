@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     randomize() {
-      console.log("randomize it!");
       // tracking the interval when running
       // need to track so we can clear it later
       let shuffleInterval;
@@ -61,7 +60,6 @@ export default {
       let currentShuffle = 0;
 
       const shuffleCallback = () => {
-        console.log("shuffling", currentShuffle);
         if (currentShuffle < numberOfShuffles) {
           this.people = shuffle(this.people);
           currentShuffle++;
