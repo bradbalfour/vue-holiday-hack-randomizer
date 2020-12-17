@@ -1,11 +1,5 @@
-<template>
-  <div class="home">
-    <PeopleList :people="people" />
-    <!-- <PeopleList v-bind="{ people }" /> -->
-  </div>
-</template>
-
 <script>
+import shuffle from 'lodash/shuffle'
 // @ is an alias to /src
 import PeopleList from "@/components/PeopleList.vue";
 
@@ -21,6 +15,30 @@ const samplePeople = [
   {
     name: "Bryan Strong",
     email: "hi@something.com"
+  },
+  {
+    name: "Tracey Holinka",
+    email: "hello1@email.com"
+  },
+  {
+    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    email: "hello2@anotheremail.com"
+  },
+  {
+    name: "Bryan Strong",
+    email: "hi3@something.com"
+  },
+  {
+    name: "Tracey Holinka",
+    email: "hello4@email.com"
+  },
+  {
+    name: "Brad Balfour", // I totally know how to spell Brad's last name without looking it up
+    email: "hello5@anotheremail.com"
+  },
+  {
+    name: "Bryan Strong",
+    email: "hi6@something.com"
   }
 ];
 
@@ -31,6 +49,20 @@ export default {
   },
   data() {
     return { people: samplePeople };
+  },
+  methods: {
+    randomize() {
+      console.log('random 🤪')
+      this.people = shuffle(this.people)
+    }
   }
 };
 </script>
+
+<template>
+  <div class="home">
+    <PeopleList :people="people" />
+    <button @click="randomize">Randomize! 🤪</button>
+    <!-- <PeopleList v-bind="{ people }" /> -->
+  </div>
+</template>

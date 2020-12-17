@@ -15,13 +15,17 @@ export default {
 
 <template>
   <div class="names-list">
-    <ul>
+    <transition-group name="flip-list" tag="ul">
       <li v-for="{ name, email } in people" :key="email">
         {{ name }}
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.flip-list-move {
+  transition: transform 1s;
+}
+</style>
